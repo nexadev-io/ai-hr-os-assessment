@@ -57,4 +57,4 @@ ai-hr-os-assessment/
 
 ## 📬 Questions?
 
-Email: **engineering@nexadev.io**
+Email: **hello@nexadev.io**
