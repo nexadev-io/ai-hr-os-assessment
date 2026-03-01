@@ -1,0 +1,7 @@
+
+# User requested ignores
+jobs-svc/node_modules/
+jobs-svc/dist
+jobs-svc/.env
+jobs-svc/package-lock.json
+jobs-svc/package.json
