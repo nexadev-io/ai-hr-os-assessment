@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 import app from "./app";
 import { databaseConnecting, setupPrismaShutdownHooks } from "./config/db";
+import notFound from "./middleware/notFound";
+import globalErrorHandler from "./middleware/globalErrorhandler";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
@@ -18,5 +20,9 @@ async function startServer() {
     process.exit(1);
   }
 }
+
+
+app.use(notFound);
+app.use(globalErrorHandler);
 
 startServer();
