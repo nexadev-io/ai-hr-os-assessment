@@ -7,3 +7,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCK
+}
+
+model User {
+  id            String     @id @default(uuid())
+  name          String
+  tenantId      String     @map("tenant_id") @db.Uuid
+  role          Role       @default(USER)
+  email         String     @unique
+  password      String
+  status        UserStatus @default(ACTIVE)
+  emailVerified Boolean    @default(false)
+  isDeleted     Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([tenantId], map: "users_tenant_id_idx")
+}
+
+model Tenant {
+  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String @db.VarChar(255)
+  users User[]
+
+  @@map("tenants")
+}

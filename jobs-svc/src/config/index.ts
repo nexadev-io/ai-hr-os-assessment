@@ -9,4 +9,6 @@ export default {
   mongo_prod: process.env.MONGO_PROD,
   port: process.env.PORT,
   jwt_secret: process.env.JWT_SECRET,
+  smtp_user: process.env.SMTP_USER,
+  smtp_pass: process.env.SMTP_PASS,
 };
