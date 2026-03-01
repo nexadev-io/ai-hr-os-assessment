@@ -5,8 +5,8 @@ This service includes Auth, User, and Jobs APIs.
 ## 1) Clone the Project + Install Dependencies
 
 ```bash
-git clone <YOUR_REPO_URL>
-cd jobs-svc
+git clone https://github.com/nexadev-io/ai-hr-os-assessment.git
+cd ai-hr-os-assessment/jobs-svc
 npm install
 ```
 
@@ -14,13 +14,12 @@ npm install
 
 This project uses two environment files:
 
-- `src/.env` (app runtime environment)
-- `prisma/.env` (Prisma database environment)
+- `src/.env` (app runtime environment) 
 
 ### `src/.env` (example)
 
 ```env
-PORT=3001
+PORT=3000
 NODE_ENV=development
 
 SMTP_USER=your_email@gmail.com
@@ -31,16 +30,8 @@ EMAIL_SECRET=your_email_secret
 RESET_SECRET=your_reset_secret
 
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ai_hr_os?schema=public"
-```
-
-### `prisma/.env` (example)
-
-```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ai_hr_os?schema=public"
-```
-
-> Note: It is best to keep the same `DATABASE_URL` value in both `src/.env` and `prisma/.env`.
-
+``` 
+ 
 ## 3) Database + Run the Server
 
 ```bash
@@ -148,9 +139,9 @@ From the response:
 
 ### Step E: Get Jobs / Get Single Job / Delete Job
 
-- `GET {{baseUrl}}/jobs/tenant/{{tenantId}}`
-- `GET {{baseUrl}}/jobs/tenant/{{tenantId}}/{{jobId}}`
-- `DELETE {{baseUrl}}/jobs/tenant/{{tenantId}}/{{jobId}}`
+- `GET {{baseUrl}}/jobs/tenant/`
+- `GET {{baseUrl}}/jobs/tenant/{{jobId}}`
+- `DELETE {{baseUrl}}/jobs/tenant/{{jobId}}`
 
 For all these endpoints, use:
 
