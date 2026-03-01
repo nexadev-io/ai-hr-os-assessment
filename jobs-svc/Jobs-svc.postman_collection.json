@@ -316,6 +316,80 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Get All Jobs By TenantId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/tenant/{{tenantId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                "tenant",
+                "{{tenantId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Job By Id And TenantId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/tenant/{{tenantId}}/{{jobId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                "tenant",
+                "{{tenantId}}",
+                "{{jobId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Job By Id And TenantId",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/tenant/{{tenantId}}/{{jobId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs",
+                "tenant",
+                "{{tenantId}}",
+                "{{jobId}}"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     }
@@ -336,6 +410,14 @@
     {
       "key": "resetToken",
       "value": ""
+    },
+    {
+      "key": "tenantId",
+      "value": "REPLACE_WITH_TENANT_UUID"
+    },
+    {
+      "key": "jobId",
+      "value": "REPLACE_WITH_JOB_UUID"
     }
   ]
 }
