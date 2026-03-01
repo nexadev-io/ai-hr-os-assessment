@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCK
+}
+
+model User {
+  id            String     @id @default(uuid())
+  name          String
+  tenantId      String     @map("tenant_id") @db.Uuid
+  role          Role       @default(USER)
+  email         String     @unique
+  password      String 
+  status        UserStatus @default(ACTIVE)
+  emailVerified Boolean    @default(false)
+  isDeleted     Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([tenantId], map: "users_tenant_id_idx")
+}
+
+model Tenant {
+  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String @db.VarChar(255)
+  jobs  Job[]
+  users User[]
+
+  @@map("tenants")
+}
+
+model Job {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId       String   @map("tenant_id") @db.Uuid
+  title          String   @db.VarChar(255)
+  department     String?  @db.VarChar(100)
+  location       String?  @db.VarChar(150)
+  employmentType String?  @map("employment_type") @db.VarChar(50)
+  salaryMin      Int?     @map("salary_min")
+  salaryMax      Int?     @map("salary_max")
+  description    String?
+  status         String   @default("draft") @db.VarChar(50)
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @default(now()) @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([tenantId], map: "jobs_tenant_id_idx")
+  @@map("jobs")
+}
